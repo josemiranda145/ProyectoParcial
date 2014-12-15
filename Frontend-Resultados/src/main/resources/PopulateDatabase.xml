@@ -1,65 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2013 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2013 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
-	<!-- User accounts -->
 
-	<bean id="opcion1" class="domain.Opcion">
-				<property name="nombre" value="PODEMOS" />
-		</bean>
-		<bean id="opcion2" class="domain.Opcion">
-				<property name="nombre" value="PSOE" />
-		</bean>
-		<bean id="opcion3" class="domain.Opcion">
-				<property name="nombre" value="FALANGE" />
-		</bean>
-		<bean id="opcion4" class="domain.Opcion">
-				<property name="nombre" value="PP(Falange II)" />
-		</bean>
-		<bean id="opcion5" class="domain.Opcion">
-				<property name="nombre" value="CIU" />
-		</bean>
-	
-				<bean id="voto1" class="domain.Voto">
-					<property name="opcion" ref="opcion1" />
-					<property name="num_votos" value="2014584" />
-				
-				</bean>
-				<bean id="voto2" class="domain.Voto">
-					<property name="opcion" ref="opcion2" />
-					<property name="num_votos" value="124584" />
-					
-				</bean>
-				
-				<bean id="voto3" class="domain.Voto">
-					<property name="opcion" ref="opcion3" />
-					<property name="num_votos" value="6534584" />
-				
-				</bean>
-				
-				<bean id="voto4" class="domain.Voto">
-					<property name="opcion" ref="opcion4" />
-					<property name="num_votos" value="4603215" />
-				</bean>
-				
-				<bean id="voto5" class="domain.Voto">
-					<property name="opcion" ref="opcion5" />
-					<property name="num_votos" value="1703215" />
-				</bean>
+	<!-- User accounts -->
 
 
 
@@ -101,40 +52,7 @@
 			</list>
 		</property>
 	</bean>
-	
-	
-	<bean id="votacion1" class="domain.Votacion">
-		<property name="nombre" value="Generales_2011" />
-		<property name="opciones">
-			<list>
-				<ref bean="opcion1" />
-				<ref bean="opcion2" />
-				<ref bean="opcion3" />
-				<ref bean="opcion4" />
-				<ref bean="opcion5" />
-			</list>
-		</property>
-		<property name="votos">
-			<list>
-				<ref bean="voto1" />
-				<ref bean="voto2" />
-				<ref bean="voto3" />
-				<ref bean="voto4" />
-				<ref bean="voto5" />
-			</list>
-		</property>
-		</bean>
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- Other domain beans come here -->	
-	
+
+	<!-- Other domain beans come here -->
+
 </beans>
