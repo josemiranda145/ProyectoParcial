@@ -28,7 +28,7 @@ import domain.ReferendumRecuento;
 
 @Controller
 @RequestMapping("/rest")
-public class VotacionController extends AbstractController {
+public class PropuestaController extends AbstractController {
 
 	@Autowired
 	private ReferendumRecuentoService referendumRecuentoService;
@@ -37,7 +37,7 @@ public class VotacionController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public VotacionController() {
+	public PropuestaController() {
 		super();
 	}
 
