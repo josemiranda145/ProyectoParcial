@@ -11,8 +11,11 @@ resultados cuando éstos los soliciten.
 
 Los miembros del grupo encargado de desarrollar dicho subsitema son:
 
-Adrián González Castro
-
-Álvaro Fernández García
-
-Alejandro Rodríguez Palomar
+· Manuel Cabrera Coronilla: Gestor de la configuración
+· Raquel María Cumplido Díaz: Gestor de la configuración
+· José Antonio Fernández Bueno: Jefe de proyecto
+· Álvaro Fernández García: Gestor de la configuración
+· Daniel Fernández Romero: Gestor de la configuración
+· Adrián González Castro: Gestor de la configuración
+· Alejandro Rodríguez Palomar: Gestor de la configuración
+· José Pablo Ocaña Almagro: Gestor de la configuración
