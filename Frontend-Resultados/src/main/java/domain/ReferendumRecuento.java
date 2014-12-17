@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 @Access(AccessType.PROPERTY)
 public class ReferendumRecuento extends DomainEntity {
 	private int idVotacionRecuento;
+	private int idVotacionModificacion;
 	private Collection<Propuesta> propuestas;
 
 	public ReferendumRecuento() {
@@ -34,5 +35,14 @@ public class ReferendumRecuento extends DomainEntity {
 
 	public void setPropuestas(Collection<Propuesta> propuestas) {
 		this.propuestas = propuestas;
+	}
+
+	@Column(unique = true)
+	public int getIdVotacionModificacion() {
+		return idVotacionModificacion;
+	}
+
+	public void setIdVotacionModificacion(int idVotacionModificacion) {
+		this.idVotacionModificacion = idVotacionModificacion;
 	}
 }

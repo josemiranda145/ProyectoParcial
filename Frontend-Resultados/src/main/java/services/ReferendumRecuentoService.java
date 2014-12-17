@@ -43,6 +43,11 @@ public class ReferendumRecuentoService {
 		return referendumRecuentoRepository.findIdVotacionRecuento(idVotacion);
 	}
 
+	public ReferendumRecuento findIdVotacionModificacion(Integer idModificacion) {
+		return referendumRecuentoRepository
+				.findIdVotacionModificacion(idModificacion);
+	}
+
 	public List<Propuesta> getVotacionDeRecuento(Integer idVotacion) {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -54,16 +59,32 @@ public class ReferendumRecuentoService {
 
 		String urlRecuento = "http://localhost:8080/Frontend-Resultados/rest/getPruebaPropuestas/14.do";
 
-		// urlRecuento ="http://localhost:8080/test/recuento2?idVotacion="+idVotacion;
+		// urlRecuento
+		// ="http://localhost/test/recuento2?idVotacion="+idVotacion;
 
 		String jsonString = restTemplate
 				.getForObject(urlRecuento, String.class);
 
-		return parseoJsonAPropuestas(jsonString, idVotacion);
+		return parseoJsonAPropuestas(jsonString, idVotacion, true);
+	}
+
+	public List<Propuesta> getVotacionDeModificacion(Integer idModificacion) {
+		RestTemplate restTemplate = new RestTemplate();
+
+		// String urltestModificacion =
+		// "http://localhost:8080/Frontend-Resultados/rest/getPruebaPropuestas/14.do";
+
+		String urlModificacion = "http://localhost/Modificacion/modificacion/resultados.do?votacionId="
+				+ idModificacion;
+
+		String jsonString = restTemplate.getForObject(urlModificacion,
+				String.class);
+
+		return parseoJsonAPropuestas(jsonString, idModificacion, false);
 	}
 
 	public List<Propuesta> parseoJsonAPropuestas(String jsonString,
-			int idVotacionRecuento) {
+			int idVotacion, boolean recuento) {
 		List<Propuesta> propuestas;
 
 		ReferendumRecuento referendumRecuento;
@@ -83,15 +104,18 @@ public class ReferendumRecuentoService {
 					"Error al obtener los datos de la votación:\n" + jsonString);
 		}
 		referendumRecuento = new ReferendumRecuento();
-		referendumRecuento.setIdVotacionRecuento(idVotacionRecuento);
+		if (recuento) {
+			referendumRecuento.setIdVotacionRecuento(idVotacion);
+		} else {
+			referendumRecuento.setIdVotacionModificacion(idVotacion);
+
+		}
 		referendumRecuento = save(referendumRecuento);
 		for (Propuesta p : propuestas) {
 			p.setReferendumRecuento(referendumRecuento);
 			propuestaService.save(p);
 
 		}
-
-		
 
 		return propuestas;
 	}
@@ -110,4 +134,5 @@ public class ReferendumRecuentoService {
 		}
 		return res;
 	}
+
 }
