@@ -1,57 +1,64 @@
 start transaction;
 
+drop database if exists `egc-frontend`;
+create database `egc-frontend`;
+use `egc-frontend`;
 
-create database `EGC-Frontend`;
-use `EGC-Frontend`;
+
+
+/*create user 'acme-user'@'%' identified by password '*4F10007AADA9EE3DBB2CC36575DFC6F4FDE27577';
+create user 'acme-manager'@'%' identified by password '*FDB8CD304EB2317D10C95D797A4BD7492560F55F';
+*/
 
 grant select, insert, update, delete
-on `EGC-Frontend`.* to 'acme-user'@'%';
+on `egc-frontend`.* to 'acme-user'@'%';
 
 grant select, insert, update, delete, create, drop, references, index, alter,
 create temporary tables, lock tables, create view, create routine,
 alter routine, execute, trigger, show view
-on `EGC-Frontend`.* to 'acme-manager'@'%';
+on `egc-frontend`.* to 'acme-manager'@'%';
+
+
+
+
 
 --
--- Table structure for table `opcion`
+-- Table structure for table `referendumrecuento`
 --
 
-DROP TABLE IF EXISTS `opcion`;
-
-CREATE TABLE `opcion` (
+DROP TABLE IF EXISTS `referendumrecuento`;
+CREATE TABLE `referendumrecuento` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
---
--- Table structure for table `voto`
---
-
-DROP TABLE IF EXISTS `voto`;
-
-CREATE TABLE `voto` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `num_votos` int(11) DEFAULT NULL,
-  `opcion_id` int(11) DEFAULT NULL,
+  `idVotacionModificacion` int(11) DEFAULT NULL,
+  `idVotacionRecuento` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_s2830im2p8ljcuby44jkl3v4s` (`opcion_id`),
-  CONSTRAINT `FK_s2830im2p8ljcuby44jkl3v4s` FOREIGN KEY (`opcion_id`) REFERENCES `opcion` (`id`)
+  UNIQUE KEY `UK_54637unv3hexjyd3jlo81suk6` (`idVotacionModificacion`),
+  UNIQUE KEY `UK_s5w2v28bcbk0n92k1l00qt6ku` (`idVotacionRecuento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ 
+--
+-- Table structure for table `propuesta`
+--
 
-
-
+DROP TABLE IF EXISTS `propuesta`;
+CREATE TABLE `propuesta` (
+  `id` int(11) NOT NULL,
+  `version` int(11) NOT NULL,
+  `numeroNo` int(11) DEFAULT NULL,
+  `numeroSi` int(11) DEFAULT NULL,
+  `pregunta` varchar(255) DEFAULT NULL,
+  `referendumRecuento_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_7hbharynb2y72557pr80wwqqt` (`referendumRecuento_id`),
+  CONSTRAINT `FK_7hbharynb2y72557pr80wwqqt` FOREIGN KEY (`referendumRecuento_id`) REFERENCES `referendumrecuento` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `useraccount`
 --
 
 DROP TABLE IF EXISTS `useraccount`;
-
 CREATE TABLE `useraccount` (
   `id` int(11) NOT NULL,
   `version` int(11) NOT NULL,
@@ -66,7 +73,7 @@ CREATE TABLE `useraccount` (
 --
 
 LOCK TABLES `useraccount` WRITE;
-INSERT INTO `useraccount` VALUES (11,0,'21232f297a57a5a743894a0e4a801fc3','admin');
+INSERT INTO `useraccount` VALUES (1,0,'21232f297a57a5a743894a0e4a801fc3','admin');
 UNLOCK TABLES;
 
 --
@@ -86,56 +93,8 @@ CREATE TABLE `useraccount_authorities` (
 --
 
 LOCK TABLES `useraccount_authorities` WRITE;
-INSERT INTO `useraccount_authorities` VALUES (11,'ADMIN');
+INSERT INTO `useraccount_authorities` VALUES (1,'ADMIN');
 UNLOCK TABLES;
-
-
---
--- Table structure for table `votacion`
---
-
-DROP TABLE IF EXISTS `votacion`;
-CREATE TABLE `votacion` (
-  `id` int(11) NOT NULL,
-  `version` int(11) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
---
--- Table structure for table `votacion_opcion`
---
-
-DROP TABLE IF EXISTS `votacion_opcion`;
-CREATE TABLE `votacion_opcion` (
-  `Votacion_id` int(11) NOT NULL,
-  `opciones_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_oovxg5c61h8jxncwfxb2of1kq` (`opciones_id`),
-  KEY `FK_oovxg5c61h8jxncwfxb2of1kq` (`opciones_id`),
-  KEY `FK_1sdpd2g5hee541n6puunsmh1t` (`Votacion_id`),
-  CONSTRAINT `FK_1sdpd2g5hee541n6puunsmh1t` FOREIGN KEY (`Votacion_id`) REFERENCES `votacion` (`id`),
-  CONSTRAINT `FK_oovxg5c61h8jxncwfxb2of1kq` FOREIGN KEY (`opciones_id`) REFERENCES `opcion` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
---
--- Table structure for table `votacion_voto`
---
-
-DROP TABLE IF EXISTS `votacion_voto`;
-CREATE TABLE `votacion_voto` (
-  `Votacion_id` int(11) NOT NULL,
-  `votos_id` int(11) NOT NULL,
-  UNIQUE KEY `UK_42l8uud0tejybny12ktivu701` (`votos_id`),
-  KEY `FK_42l8uud0tejybny12ktivu701` (`votos_id`),
-  KEY `FK_26slxb81lmuebfggbddryf441` (`Votacion_id`),
-  CONSTRAINT `FK_26slxb81lmuebfggbddryf441` FOREIGN KEY (`Votacion_id`) REFERENCES `votacion` (`id`),
-  CONSTRAINT `FK_42l8uud0tejybny12ktivu701` FOREIGN KEY (`votos_id`) REFERENCES `voto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 
 --
@@ -143,7 +102,6 @@ CREATE TABLE `votacion_voto` (
 --
 
 DROP TABLE IF EXISTS `hibernate_sequences`;
-
 CREATE TABLE `hibernate_sequences` (
   `sequence_name` varchar(255) DEFAULT NULL,
   `sequence_next_hi_value` int(11) DEFAULT NULL
@@ -154,11 +112,8 @@ CREATE TABLE `hibernate_sequences` (
 --
 
 LOCK TABLES `hibernate_sequences` WRITE;
-INSERT INTO `hibernate_sequences` VALUES ('DomainEntity',1);
+INSERT INTO `hibernate_sequences` VALUES ('DomainEntity',2);
 UNLOCK TABLES;
 
-
-
-
--- Dump completed on 2014-11-24 13:22:35
-commit;
+-- Dump completed on 2014-12-17 16:16:37
+commit; 
