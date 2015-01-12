@@ -74,7 +74,7 @@ public class ReferendumRecuentoService {
 		// String urltestModificacion =
 		// "http://localhost:8080/Frontend-Resultados/rest/getPruebaPropuestas/14.do";
 
-		String urlModificacion = "http://localhost/Modificacion/modificacion/resultados.do?votacionId="
+		String urlModificacion = "http://localhost:8181/modificacion/results?votacionId="
 				+ idModificacion;
 
 		String jsonString = restTemplate.getForObject(urlModificacion,

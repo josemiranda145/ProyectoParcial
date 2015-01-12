@@ -50,7 +50,7 @@ public class PropuestaController extends AbstractController {
 
 	}
 
-	@RequestMapping(value = "/getVotacion", method = RequestMethod.GET)
+	@RequestMapping(value = "/getVotacionRecuento", method = RequestMethod.GET)
 	public @ResponseBody
 	Object[] getVotacion(@RequestParam Integer idVotacion) {
 		ReferendumRecuento referendumRecuento;
@@ -85,7 +85,42 @@ public class PropuestaController extends AbstractController {
 		return res;
 
 	}
-	
+
+	@RequestMapping(value = "/getVotacion", method = RequestMethod.GET)
+	public @ResponseBody
+	Object[] getVotacion2(@RequestParam Integer idVotacion) {
+		ReferendumRecuento referendumModificacion;
+		List<Propuesta> propuestas;
+
+		propuestas = new LinkedList<Propuesta>();
+
+		if (idVotacion == null) {
+			// la peticion debe indicar una id, sin ella no sabemos a que
+			// modificacion se refiere
+			throw new IllegalArgumentException(
+					"No se ha indicado correctamente el id de la modificacion");
+		}
+		referendumModificacion = referendumRecuentoService
+				.findIdVotacionModificacion(idVotacion);
+		// si no es nula es que ya la hemos obtenido y guardado anteriormente,
+		// simplemente la recuperamos de nuestra base de datos
+		if (referendumModificacion == null) {
+
+			// Es decir es una votación nueva, por lo que nos comunicamos con
+			// recuento
+			propuestas = referendumRecuentoService
+					.getVotacionDeModificacion(idVotacion);
+
+		} else {
+			propuestas = (List<Propuesta>) referendumModificacion
+					.getPropuestas();
+		}
+
+		// parseamos la informacion de la votacion para visualizacion
+		Object[] res = referendumRecuentoService
+				.ParseoDatosVisualizacion(propuestas);
+		return res;
+	}
 
 	@RequestMapping(value = "/getModificacion", method = RequestMethod.GET)
 	public @ResponseBody
@@ -113,7 +148,8 @@ public class PropuestaController extends AbstractController {
 					.getVotacionDeModificacion(idModificacion);
 
 		} else {
-			propuestas = (List<Propuesta>) referendumModificacion.getPropuestas();
+			propuestas = (List<Propuesta>) referendumModificacion
+					.getPropuestas();
 		}
 
 		// parseamos la informacion de la votacion para visualizacion
@@ -122,6 +158,5 @@ public class PropuestaController extends AbstractController {
 		return res;
 
 	}
-	
 
 }

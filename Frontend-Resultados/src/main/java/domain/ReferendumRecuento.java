@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -19,7 +18,6 @@ public class ReferendumRecuento extends DomainEntity {
 		super();
 	}
 
-	@Column(unique = true)
 	public int getIdVotacionRecuento() {
 		return idVotacionRecuento;
 	}
@@ -37,7 +35,6 @@ public class ReferendumRecuento extends DomainEntity {
 		this.propuestas = propuestas;
 	}
 
-	@Column(unique = true)
 	public int getIdVotacionModificacion() {
 		return idVotacionModificacion;
 	}
