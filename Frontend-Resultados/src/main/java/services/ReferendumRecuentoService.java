@@ -127,8 +127,8 @@ public class ReferendumRecuentoService {
 		for (Propuesta p : propuestas) {
 			Object res2[] = new Object[3];
 			res2[0] = p.getPregunta();
-			res2[1] = p.getNumeroSi();
-			res2[2] = p.getNumeroNo();
+			res2[1] = p.getNumerosSi();
+			res2[2] = p.getNumerosNo();
 			res[cont] = res2;
 			cont++;
 		}

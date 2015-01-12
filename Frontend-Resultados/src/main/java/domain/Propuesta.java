@@ -20,8 +20,8 @@ public class Propuesta extends DomainEntity implements Serializable {
 	 * 
 	 */
 	private String pregunta;
-	private Integer numeroSi;
-	private Integer numeroNo;
+	private Integer numerosSi;
+	private Integer numerosNo;
 
 	private ReferendumRecuento referendumRecuento;
 
@@ -37,20 +37,20 @@ public class Propuesta extends DomainEntity implements Serializable {
 		this.pregunta = pregunta;
 	}
 
-	public Integer getNumeroSi() {
-		return numeroSi;
+	public Integer getNumerosSi() {
+		return numerosSi;
 	}
 
-	public void setNumeroSi(Integer numeroSi) {
-		this.numeroSi = numeroSi;
+	public void setNumerosSi(Integer numerosSi) {
+		this.numerosSi = numerosSi;
 	}
 
-	public Integer getNumeroNo() {
-		return numeroNo;
+	public Integer getNumerosNo() {
+		return numerosNo;
 	}
 
-	public void setNumeroNo(Integer numeroNo) {
-		this.numeroNo = numeroNo;
+	public void setNumerosNo(Integer numerosNo) {
+		this.numerosNo = numerosNo;
 	}
 
 	@Valid

@@ -39,17 +39,17 @@ public class PropuestaService {
 		res = new LinkedList<Propuesta>();
 		Propuesta p1 = new Propuesta();
 		p1.setPregunta("cuestion1");
-		p1.setNumeroNo(200);
-		p1.setNumeroSi(500);
+		p1.setNumerosNo(200);
+		p1.setNumerosSi(500);
 		Propuesta p2 = new Propuesta();
 		p2.setPregunta("cuestion2");
-		p2.setNumeroNo(400);
-		p2.setNumeroSi(100);
+		p2.setNumerosNo(400);
+		p2.setNumerosSi(100);
 
 		Propuesta p3 = new Propuesta();
 		p3.setPregunta("cuestion3");
-		p3.setNumeroNo(500);
-		p3.setNumeroSi(300);
+		p3.setNumerosNo(500);
+		p3.setNumerosSi(300);
 
 		res.add(p1);
 		res.add(p2);
