@@ -26,5 +26,8 @@
 				
 <a href="http://localhost:8080/Modificacion"><spring:message
 				code="welcome.mod" /></a>
+				
+<a href="https://1984.lsi.us.es/wiki-egc/index.php/P%C3%A1gina_Principal"><spring:message
+				code="welcome.wiki" /></a>
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
