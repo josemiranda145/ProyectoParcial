@@ -89,7 +89,6 @@ public class PropuestaController extends AbstractController {
 	@RequestMapping(value = "/getVotacion", method = RequestMethod.GET)
 	public @ResponseBody
 	Object[] getVotacion2(@RequestParam Integer idVotacion) {
-		ReferendumRecuento referendumModificacion;
 		List<Propuesta> propuestas;
 
 		propuestas = new LinkedList<Propuesta>();
@@ -100,21 +99,12 @@ public class PropuestaController extends AbstractController {
 			throw new IllegalArgumentException(
 					"No se ha indicado correctamente el id de la modificacion");
 		}
-		referendumModificacion = referendumRecuentoService
-				.findIdVotacionModificacion(idVotacion);
-		// si no es nula es que ya la hemos obtenido y guardado anteriormente,
-		// simplemente la recuperamos de nuestra base de datos
-		if (referendumModificacion == null) {
 
-			// Es decir es una votación nueva, por lo que nos comunicamos con
-			// recuento
+		
 			propuestas = referendumRecuentoService
 					.getVotacionDeModificacion(idVotacion);
 
-		} else {
-			propuestas = (List<Propuesta>) referendumModificacion
-					.getPropuestas();
-		}
+		
 
 		// parseamos la informacion de la votacion para visualizacion
 		Object[] res = referendumRecuentoService
